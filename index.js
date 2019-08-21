@@ -13,7 +13,7 @@ usb.on('attach', function(device) {
 
                     const parser = new Readline();
                     sp.pipe(parser);
-                    sp.write("setNetSettings('ComponentTeam', '27122712', '192.168.1.77')\n");
+                    sp.write("setNetSettings('ComponentTeam', '27122712', '192.168.1.69')\n");
                     console.log(555)
                 }
             });

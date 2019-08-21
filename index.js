@@ -9,7 +9,7 @@ const ascoltatore = {
 };
 
 const settings = {
-    port: 1884,
+    port: 1883,
     backend: ascoltatore
 };
 

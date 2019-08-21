@@ -1,20 +1,22 @@
-const mosca = require('mosca');
+const SerialPort = require('serialport');
+const Readline = require('@serialport/parser-readline');
 
-const ascoltatore = {
-    //using ascoltatore
-    type: 'mongo',
-    url: 'mongodb://localhost:27017/mqtt1',
-    pubsubCollection: 'ascoltatori',
-    mongo: {}
-};
+const usb = require('usb');
 
-const settings = {
-    port: 1883,
-    backend: ascoltatore
-};
+usb.on('attach', function(device) {
+    setTimeout(() => {
+        SerialPort.list(function (err, ports) {
+            ports.forEach(function(port) {
+                if(port.serialNumber){
+                    const path = port.comName;
+                    const sp = new SerialPort(path, { baudRate: 115200 });
 
-const server = new mosca.Server(settings);
-
-server.on('clientConnected', (client) => {
-    console.log('client connected', client.id);
+                    const parser = new Readline();
+                    sp.pipe(parser);
+                    sp.write("setNetSettings('ComponentTeam', '27122712', '192.168.1.77')\n");
+                    console.log(555)
+                }
+            });
+        });
+    }, 1000)
 });

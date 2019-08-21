@@ -5,6 +5,8 @@
   "author": "component17",
   "license": "MIT",
   "dependencies": {
-    "mosca": "^2.8.3"
+    "@serialport/parser-readline": "^2.0.2",
+    "serialport": "^7.1.5",
+    "usb": "^1.6.0"
   }
 }

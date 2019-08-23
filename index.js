@@ -31,6 +31,8 @@ setInterval(() => {
     let data= Buffer.from('Hello nrf'); // Create a node buffer for sending data
     rf24.useWritePipe("0x72646f4e31",true); // Select the pipe address to write with Autock
     rf24.write(data); // send the data in sync mode
+
+    rf24.getStats();
 }, 5000);
 
 // Configure the radio

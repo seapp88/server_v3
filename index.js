@@ -27,9 +27,16 @@ const nrf24 = require("nrf24"); // Load de module
 let rf24= new nrf24.nRF24(22,7);
 rf24.begin();
 
+rf24.config({
+    PALevel: nrf24.RF24_PA_MAX,
+    DataRate: nrf24.RF24_2MBPS,
+    Channel: 2,
+    CRCLength: nrf24.RF24_CRC_8
+});
+
 setInterval(() => {
     let data= Buffer.from('Hello nrf'); // Create a node buffer for sending data
-    rf24.useWritePipe("0x72646f4e31",true); // Select the pipe address to write with Autock
+    rf24.useWritePipe("0xF0F0F0F0F0LL",true); // Select the pipe address to write with Autock
     rf24.write(data); // send the data in sync mode
 
     console.log(rf24.getStats());

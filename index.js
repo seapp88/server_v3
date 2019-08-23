@@ -36,7 +36,7 @@ rf24.config({
 
 setInterval(() => {
     let data= Buffer.from('Hello nrf'); // Create a node buffer for sending data
-    rf24.useWritePipe("0xF0F0F0F0F0LL",true); // Select the pipe address to write with Autock
+    rf24.useWritePipe("0xF0F0F0F0F0",true); // Select the pipe address to write with Autock
     rf24.write(data); // send the data in sync mode
 
     console.log(rf24.getStats());

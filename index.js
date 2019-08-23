@@ -32,7 +32,7 @@ setInterval(() => {
     rf24.useWritePipe("0x72646f4e31",true); // Select the pipe address to write with Autock
     rf24.write(data); // send the data in sync mode
 
-    rf24.getStats();
+    console.log(rf24.getStats());
 }, 5000);
 
 // Configure the radio

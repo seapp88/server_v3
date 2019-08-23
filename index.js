@@ -34,6 +34,9 @@ rf24.config({
     CRCLength: nrf24.RF24_CRC_8
 });
 
+console.log("Radio connected:" + rf24.present());
+
+
 setInterval(() => {
     let data= Buffer.from('Hello nrf'); // Create a node buffer for sending data
     rf24.useWritePipe("0xF0F0F0F0F0",true); // Select the pipe address to write with Autock

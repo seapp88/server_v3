@@ -20,3 +20,14 @@ usb.on('attach', function(device) {
         });
     }, 1000)
 });
+
+const nrf24 = require("nrf24"); // Load de module
+
+// Init the radio
+let rf24= new nrf24.nRF24(22,7);
+rf24.begin();
+// Configure the radio
+// rf24.config({
+//     PALevel: nrf24.RF24_PA_LOW,
+//     DataRate: nrf24.RF24_2MBPS,
+// });

@@ -26,6 +26,13 @@ const nrf24 = require("nrf24"); // Load de module
 // Init the radio
 let rf24= new nrf24.nRF24(22,7);
 rf24.begin();
+
+setInterval(() => {
+    let data= Buffer.from('Hello nrf'); // Create a node buffer for sending data
+    rf24.useWritePipe("0x72646f4e31",true); // Select the pipe address to write with Autock
+    rf24.write(data); // send the data in sync mode
+}, 5000);
+
 // Configure the radio
 // rf24.config({
 //     PALevel: nrf24.RF24_PA_LOW,

@@ -40,7 +40,7 @@ app.use('/api/v1/wifi', wifi);
 app.use('/api/v1/settings', settings);
 app.use('/api/v1/modules', modules);
 
-server.listen(80, () => {
+server.listen(3000, () => {
     console.log('Start server 3000 port');
 });
 

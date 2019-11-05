@@ -42,6 +42,12 @@ app.use('/api/v1/modules', modules);
 
 server.listen(3000, () => {
     console.log('Start server 3000 port');
+    const { spawn } = require('child_process');
+    const startx = spawn('startx');
+
+    startx.on('close', (code) => {
+        console.log(`child process exited with code ${code}`);
+    });
 });
 
 io.use((socket, next) => {

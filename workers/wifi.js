@@ -31,6 +31,11 @@ let scan = () => {
 
 scan();
 
+let os = require('os');
+let ifaces = os.networkInterfaces();
+
+console.log(ifaces)
+
 process.on('message', (m) => {
     if(m.method === 'disconnect'){
         wifi.disconnect(function(err) {

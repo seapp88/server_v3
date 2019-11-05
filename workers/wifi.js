@@ -1,6 +1,6 @@
 const wifi = require("node-wifi");
 wifi.init({
-    iface: null
+    iface: 'wlp2s0'
 });
 
 let scan = () => {

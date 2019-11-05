@@ -37,14 +37,22 @@ let ifaces = os.networkInterfaces();
 console.log(ifaces)
 
 process.on('message', (m) => {
-    console.log('WIFI Disconnect')
-
     if(m.method === 'disconnect'){
-        wifi.disconnect(function(err) {
+        wifi.getCurrentConnections((err, currentConnections) => {
             if (err) {
                 console.log(err);
+            }else{
+                if(currentConnections[0]){
+                    wifi.deleteConnection({ssid: currentConnections[0].ssid}, function(err) {
+                        if (err) {
+                            console.log(err);
+                        }
+                        process.send({ method: 'disconnected'});
+                    });
+                }else{
+                    process.send({ method: 'disconnected'});
+                }
             }
-            process.send({ method: 'disconnected'});
         });
     }
 

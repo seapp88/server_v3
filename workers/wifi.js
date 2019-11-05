@@ -29,7 +29,7 @@ let scan = () => {
     });
 }
 
-scan();
+//scan();
 
 process.on('message', (m) => {
     if(m.method === 'disconnect'){

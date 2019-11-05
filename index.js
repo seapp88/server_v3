@@ -20,7 +20,7 @@ process.on('SIGTERM', cleanExit);
 
 global.io = require('socket.io')(server);
 global.store = require('./store/index');
-global.wifiStore = {};
+global.wifiStore = [];
 global.bagholders_online = new Set();
 
 app.use(express.static(__dirname + '/public'));

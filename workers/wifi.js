@@ -38,22 +38,28 @@ console.log(ifaces)
 
 process.on('message', (m) => {
     if(m.method === 'disconnect'){
-        wifi.getCurrentConnections((err, currentConnections) => {
+        wifi.disconnect(function(err) {
             if (err) {
                 console.log(err);
-            }else{
-                if(currentConnections[0]){
-                    wifi.deleteConnection({ssid: currentConnections[0].ssid}, function(err) {
-                        if (err) {
-                            console.log(err);
-                        }
-                        process.send({ method: 'disconnected'});
-                    });
-                }else{
-                    process.send({ method: 'disconnected'});
-                }
             }
+            wifi.getCurrentConnections((err, currentConnections) => {
+                if (err) {
+                    console.log(err);
+                }else{
+                    if(currentConnections[0]){
+                        wifi.deleteConnection({ssid: currentConnections[0].ssid}, function(err) {
+                            if (err) {
+                                console.log(err);
+                            }
+                            process.send({ method: 'disconnected'});
+                        });
+                    }else{
+                        process.send({ method: 'disconnected'});
+                    }
+                }
+            });
         });
+
     }
 
     if(m.method === 'connect'){

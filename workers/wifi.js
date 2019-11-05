@@ -37,6 +37,8 @@ let ifaces = os.networkInterfaces();
 console.log(ifaces)
 
 process.on('message', (m) => {
+    console.log('WIFI Disconnect')
+
     if(m.method === 'disconnect'){
         wifi.disconnect(function(err) {
             if (err) {
@@ -47,6 +49,7 @@ process.on('message', (m) => {
     }
 
     if(m.method === 'connect'){
+        console.log('WIFI Connect')
         wifi.connect({ ssid: m.data.ssid, password: m.data.password }, (err) => {
             if (err) {
                 console.log(err);

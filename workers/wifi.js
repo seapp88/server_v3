@@ -35,9 +35,43 @@ let scan = () => {
 scan();
 
 let os = require('os');
-let ifaces = os.networkInterfaces();
 
-console.log(ifaces)
+setInterval(() => {
+    let ifaces = os.networkInterfaces();
+
+    let res = {
+        ethernet: {
+            ip: '',
+            mac: ''
+        },
+        wifi: {
+            ip: '',
+            mac: ''
+        }
+    };
+
+    if(ifaces['enp0s25']){
+        let item = ifaces['enp0s25'].filter(x => x.family === 'IPv4')[0];
+        if(item){
+            res.ethernet.ip = item.address;
+            res.ethernet.mac = item.mac;
+        }
+    }
+
+    if(ifaces['wlp2s0']){
+        let item = ifaces['wlp2s0'].filter(x => x.family === 'IPv4')[0];
+        if(item){
+            res.wifi.ip = item.address;
+            res.wifi.mac = item.mac;
+        }
+    }
+
+    process.send({ method: 'ifaces', data: res});
+}, 10000);
+
+
+
+
 
 process.on('message', (m) => {
     if(m.method === 'disconnect'){

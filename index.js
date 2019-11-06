@@ -21,6 +21,21 @@ process.on('SIGTERM', cleanExit);
 global.io = require('socket.io')(server);
 global.store = require('./store/index');
 global.wifiStore = [];
+global.usbStore = [];
+global.networkStore = {
+    ethernet: {
+        ip: '',
+        port: "3000",
+        mac: ''
+    },
+    wifi: {
+        ip: '',
+        port: "3000",
+        mac: '',
+        ssid: '',
+        password: ''
+    }
+};
 global.bagholders_online = new Set();
 
 app.use(express.static(__dirname + '/public'));
@@ -42,13 +57,9 @@ app.use('/api/v1/modules', modules);
 
 server.listen(3000, () => {
     console.log('Start server 3000 port');
-    const { spawn } = require('child_process');
-    const startx = spawn('startx');
-
-    startx.on('close', (code) => {
-        console.log(`child process exited with code ${code}`);
-    });
 });
+
+const fs = require('fs');
 
 io.use((socket, next) => {
     let token = socket.handshake.query;
@@ -100,5 +111,22 @@ io.on('connection', (socket) => {
             console.log(data)
             io.sockets.emit('settings:mdm:set', data);
         });
+        socket.on('export:settings', (path) => {
+            let json = JSON.stringify({
+                HOST: networkStore.ethernet.ip.length ? networkStore.ethernet.ip : networkStore.wifi.ip,
+                PORT: networkStore.ethernet.port,
+                WIFI: networkStore.wifi.ssid.length ? {SSID: networkStore.wifi.ssid, PASSWORD: networkStore.wifi.password} : null
+            });
+            fs.writeFile(path + '/settings.json', json, 'utf8', () => {
+                console.log('export:settings - OK')
+            });
+        });
+        socket.on('export:mac', (path) => {
+            fs.writeFile(path + '/ServerMac.txt', `Ethernet: ${networkStore.ethernet.mac} \nWIFI: ${networkStore.wifi.mac}`, 'utf8', () => {
+                console.log('export:mac - OK')
+            })
+        });
     }
 });
+
+

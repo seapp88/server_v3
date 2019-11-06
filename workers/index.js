@@ -14,7 +14,12 @@ wifi.on('message', (data) => {
     if(data.method === 'disconnected') {
         io.to('spa').emit('setting:wifi:connected');
     }
-    console.log(data)
+    if(data.method === 'error1') {
+        console.log(data)
+    }
+    if(data.method === 'error2') {
+        console.log(data)
+    }
 });
 
 ee.on('setting:wifi:disconnect', () => {

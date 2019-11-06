@@ -84,6 +84,7 @@ io.on('connection', (socket) => {
             ee.emit('setting:wifi:disconnect')
         });
         socket.on('setting:wifi:connect', (data) => {
+            console.log('WIFI Connect: ', data)
             ee.emit('setting:wifi:connect', data)
         });
         socket.on('settings:color:base', (data) => {

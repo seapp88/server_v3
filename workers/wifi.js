@@ -7,11 +7,13 @@ let scan = () => {
     wifi.scan((err, networks) => {
         if (err) {
             console.log(err);
+            process.send({ method: 'error1', err});
             scan();
         } else {
             wifi.getCurrentConnections((err, currentConnections) => {
                 if (err) {
                     console.log(err);
+                    process.send({ method: 'error2', err});
                     scan();
                 }else{
                     let list = networks;

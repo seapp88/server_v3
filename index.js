@@ -118,12 +118,12 @@ io.on('connection', (socket) => {
                 WIFI: networkStore.wifi.ssid.length ? {SSID: networkStore.wifi.ssid, PASSWORD: networkStore.wifi.password} : null
             });
             fs.writeFile(path + '/settings.json', json, 'utf8', () => {
-                console.log('export:settings - OK')
+                console.log('export:settings - OK', path + '/settings.json')
             });
         });
         socket.on('export:mac', (path) => {
             fs.writeFile(path + '/ServerMac.txt', `Ethernet: ${networkStore.ethernet.mac} \nWIFI: ${networkStore.wifi.mac}`, 'utf8', () => {
-                console.log('export:mac - OK')
+                console.log('export:mac - OK', path + '/ServerMac.txt')
             })
         });
     }

@@ -16,6 +16,7 @@ let scan = () => {
                 }else{
                     let list = networks;
                     if(currentConnections[0]){
+                        console.log(currentConnections[0]);
                         list = networks.filter(x => x.ssid !== currentConnections[0].ssid)
                     }
                     process.send({ method: 'scan', list: list.reverse(), current: currentConnections[0] ? currentConnections[0] : null });

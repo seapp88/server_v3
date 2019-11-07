@@ -13,8 +13,6 @@ wifi.init({
 });
 
 let scan = () => {
-    wifi.getCurrentConnections((err, current) => console.log({err, current}))
-    console.log(WiFiControl.getIfaceState())
     wifi.scan((err, networks) => {
         if (err) {
             console.log(err);
@@ -33,7 +31,7 @@ let scan = () => {
                         console.log(currentConnections[0]);
                         list = networks.filter(x => x.ssid !== currentConnections[0].ssid)
                     }
-                    process.send({ method: 'scan', list: list.reverse(), current: currentConnections[0] ? currentConnections[0] : null });
+                    process.send({ method: 'scan', list: list.reverse(), current: WiFiControl.getIfaceState()});
                     setTimeout(() => {
                         scan();
                     }, 10000)

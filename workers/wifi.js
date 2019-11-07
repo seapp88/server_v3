@@ -1,10 +1,20 @@
 const wifi = require("node-wifi");
+const WiFiControl = require('wifi-control');
+let settings = {
+    debug: false,
+    iface: 'wlp2s0',
+    connectionTimeout: 10000 // in ms
+};
+
+WiFiControl.init( settings );
+
 wifi.init({
     iface: 'wlp2s0'
 });
 
 let scan = () => {
     wifi.getCurrentConnections((err, current) => console.log({err, current}))
+    console.log(WiFiControl.getIfaceState())
     wifi.scan((err, networks) => {
         if (err) {
             console.log(err);

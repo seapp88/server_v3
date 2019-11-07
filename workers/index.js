@@ -7,7 +7,7 @@ wifi.on('message', (data) => {
         delete data.method;
         wifiStore = data;
         io.to('spa').emit('setting:wifi:scan', data);
-        // console.log(data)
+        console.log(wifiStore)
     }
     if(data.method === 'disconnected') {
         io.to('spa').emit('setting:wifi:disconnected');

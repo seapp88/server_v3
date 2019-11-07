@@ -16,7 +16,9 @@ wifi.on('message', (data) => {
         io.to('spa').emit('setting:wifi:connected');
     }
     if(data.method === 'ifaces'){
-        console.log('ifaces', data.data)
+        networkStore.ethernet.ip = data.data.ethernet.ip;
+        networkStore.wifi.ip = data.data.wifi.ip;
+        console.log(networkStore)
     }
     if(data.method === 'error1') {
         console.log(data)

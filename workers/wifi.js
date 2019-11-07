@@ -42,11 +42,9 @@ setInterval(() => {
     let res = {
         ethernet: {
             ip: '',
-            mac: ''
         },
         wifi: {
             ip: '',
-            mac: ''
         }
     };
 

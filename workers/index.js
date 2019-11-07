@@ -18,7 +18,7 @@ wifi.on('message', (data) => {
     if(data.method === 'ifaces'){
         networkStore.ethernet.ip = data.data.ethernet.ip;
         networkStore.wifi.ip = data.data.wifi.ip;
-        console.log(networkStore)
+        io.to('spa').emit('info:networking', networkStore);
     }
     if(data.method === 'error1') {
         console.log(data)

@@ -117,12 +117,12 @@ io.on('connection', (socket) => {
                 PORT: networkStore.ethernet.port,
                 WIFI: networkStore.wifi.ssid.length ? {SSID: networkStore.wifi.ssid, PASSWORD: networkStore.wifi.password} : null
             });
-            fs.writeFile(path + '/ls/settings.json', json, 'utf8', (err) => {
+            fs.writeFile(path + '/settings.json', json, 'utf8', (err) => {
                 console.log('export:settings - OK', path + '/settings.json', err)
             });
         });
         socket.on('export:mac', (path) => {
-            fs.writeFile(path + '/ls/ServerMac.txt', `Ethernet: ${networkStore.ethernet.mac} \nWIFI: ${networkStore.wifi.mac}`, 'utf8', () => {
+            fs.writeFile(path + '/ServerMac.txt', `Ethernet: ${networkStore.ethernet.mac} \nWIFI: ${networkStore.wifi.mac}`, 'utf8', () => {
                 console.log('export:mac - OK', path + '/ServerMac.txt')
             })
         });

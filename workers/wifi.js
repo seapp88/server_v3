@@ -4,6 +4,7 @@ wifi.init({
 });
 
 let scan = () => {
+    wifi.getCurrentConnections((err, current) => console.log({err, current}))
     wifi.scan((err, networks) => {
         if (err) {
             console.log(err);

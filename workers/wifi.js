@@ -12,6 +12,7 @@ let scan = () => {
         } else {
             wifi.getCurrentConnections((err, currentConnections) => {
                 if (err) {
+                    console.log(currentConnections);
                     console.log(err);
                     process.send({ method: 'error2', err});
                     scan();

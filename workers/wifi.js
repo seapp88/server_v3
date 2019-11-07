@@ -13,6 +13,7 @@ wifi.init({
 });
 
 let scan = () => {
+    console.log(WiFiControl.getIfaceState())
     wifi.scan((err, networks) => {
         if (err) {
             console.log(err);

@@ -43,7 +43,7 @@ let scan = () => {
     });
 }
 
-scan();
+//scan();
 
 let os = require('os');
 

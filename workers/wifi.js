@@ -54,7 +54,6 @@ setInterval(() => {
         let item = ifaces['enp0s25'].filter(x => x.family === 'IPv4')[0];
         if(item){
             res.ethernet.ip = item.address;
-            res.ethernet.mac = item.mac;
         }
     }
 
@@ -62,7 +61,6 @@ setInterval(() => {
         let item = ifaces['wlp2s0'].filter(x => x.family === 'IPv4')[0];
         if(item){
             res.wifi.ip = item.address;
-            res.wifi.mac = item.mac;
         }
     }
 

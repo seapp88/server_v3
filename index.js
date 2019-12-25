@@ -40,21 +40,21 @@ global.bagholders_online = new Set();
 
 let getmac = require('getmac')
 
-getmac.getMac({iface: 'enp0s25'}, function(err, macAddress){
-    if (err){
-        console.log(err)
-    }else{
-        networkStore.ethernet.mac = macAddress
-    }
-})
+// getmac.getMac({iface: 'enp0s25'}, function(err, macAddress){
+//     if (err){
+//         console.log(err)
+//     }else{
+//         networkStore.ethernet.mac = macAddress
+//     }
+// })
 
-getmac.getMac({iface: 'wlp2s0'}, function(err, macAddress){
-    if (err){
-        console.log(err)
-    }else{
-        networkStore.wifi.mac = macAddress
-    }
-})
+// getmac.getMac({iface: 'wlp2s0'}, function(err, macAddress){
+//     if (err){
+//         console.log(err)
+//     }else{
+//         networkStore.wifi.mac = macAddress
+//     }
+// })
 
 app.use(express.static(__dirname + '/public'));
 app.use(cors());

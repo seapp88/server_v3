@@ -1,6 +1,6 @@
 const cp = require('child_process');
 const wifi = cp.fork(`${__dirname}/wifi.js`);
-const usb = cp.fork(`${__dirname}/usb.js`);
+// const usb = cp.fork(`${__dirname}/usb.js`);
 
 wifi.on('message', (data) => {
     if(data.method === 'scan') {
@@ -28,10 +28,10 @@ wifi.on('message', (data) => {
     }
 });
 
-usb.on('message', (list) => {
-    usbStore = list;
-    io.to('spa').emit('setting:drive:list', list);
-})
+// usb.on('message', (list) => {
+//     usbStore = list;
+//     io.to('spa').emit('setting:drive:list', list);
+// })
 
 ee.on('setting:wifi:disconnect', () => {
     wifi.send({method: 'disconnect', data: null});

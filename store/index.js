@@ -44,7 +44,7 @@ const onChange = (objToWatch, onChangeFunction) => {
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
 
-const adapter = new FileSync('db.json');
+const adapter = new FileSync('./server_v3/db.json');
 const db = low(adapter);
 
 db.defaults(default_state).write();
